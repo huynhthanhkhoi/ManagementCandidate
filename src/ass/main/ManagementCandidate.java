@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ import ass.dao.CertificationImplDAO;
 import ass.dao.ExperienceImplDAO;
 import ass.dao.FresherImplDAO;
 import ass.dao.InternImplDAO;
+import ass.dto.CandidateDTO;
 import ass.exception.BirthDayException;
 import ass.exception.EmailException;
 import ass.model.Candidate;
@@ -26,6 +28,7 @@ import ass.model.Experience;
 import ass.model.Fresher;
 import ass.model.Intern;
 import ass.services.ServicesImplDAO;
+import ass.util.CandidateComparator;
 import ass.util.SQLCommand;
 import ass.util.UserInput;
 
@@ -34,7 +37,7 @@ public class ManagementCandidate {
 	static CertificationImplDAO ctdao = new CertificationImplDAO();
 	static FresherImplDAO frdao = new FresherImplDAO();
 	static InternImplDAO itdao = new InternImplDAO();
-    static ServicesImplDAO svdao = new ServicesImplDAO();
+    static ServicesImplDAO<?> svdao = new ServicesImplDAO<>();
 	public static void main(String[] args) throws ParseException, SQLException {
 		// down casting sử dung instanceof
 
@@ -214,10 +217,30 @@ public class ManagementCandidate {
 				List<?> list = svdao.query(SQLCommand.GET_ALL);
 				for(int i=0;i<l;i++) {
 					System.out.println(list.get(i));
-				}
-				
+				}				
 				break;
-			case 4:
+			case 4:				
+				List<CandidateDTO> candidateDTOList =svdao.queryGetAllCandidate(SQLCommand.GET_ALL);
+			    Collections.sort(candidateDTOList, new CandidateComparator());
+			    int lenght = candidateDTOList.size();
+			    for(int i=0;i<lenght;i++) {
+					System.out.println(candidateDTOList.get(i));
+				}				
+			   
+				break;
+				
+			case 5:	
+				sc.nextLine();
+				System.out.println("Enter candidate ID you want to update");
+				String candidateID1 = sc.nextLine();
+				svdao.updateCandidateByID(candidateID1);
+				break;
+				
+			case 6:	
+				System.out.println("Please Input type of candidate you want to insert ; 0: Experience; 1: Fresher; 2: Intern");
+				candidateType = sc.nextInt();				
+				svdao.insertCandidate(candidateType);
+				   
 				break;
 
 			default:
@@ -234,6 +257,9 @@ public class ManagementCandidate {
 		System.out.println("1. Add candidate");
 		System.out.println("2. Show all fullname of all candidate by string ");
 		System.out.println("3. Show list candidate ");
+		System.out.println("4. Show list ordered by candidate ASC  and year of birthday DESC ");
+		System.out.println("5. Updatate candidate by candidate id using ResulfSet ");
+		System.out.println("6. Insert candidate by candidate id using ResulfSet ");
 //		    System.out.println("3. Delete one or more item(s) from a bill");
 //		    System.out.println("4. Display all bills, sorted by created date");
 //		    System.out.println("5. Display customer's bills, sorted by created date");

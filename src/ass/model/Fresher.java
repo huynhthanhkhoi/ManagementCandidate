@@ -7,6 +7,7 @@
 package ass.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Fresher extends Candidate {
 
@@ -15,14 +16,15 @@ public class Fresher extends Candidate {
 	private String graduationRank;
 
 	private String education;
-	
-	
+
 	public Fresher() {
-		
+
 	}
 
-	public Fresher(Date graduationDate, String graduationRank, String education) {
-		super();
+	public Fresher(String candidateID, String fullName, Date birthDay, String email, int candidateType,
+			long candidatCount, List<Certification> certification, Date graduationDate, String graduationRank,
+			String education) {
+		super(candidateID, fullName, birthDay, email, candidateType, candidatCount, certification);
 		this.graduationDate = graduationDate;
 		this.graduationRank = graduationRank;
 		this.education = education;
@@ -52,8 +54,6 @@ public class Fresher extends Candidate {
 		this.education = education;
 	}
 
-	
-
 //	@Override
 //	public String toString() {
 //		// TODO Auto-generated method stub
@@ -62,8 +62,7 @@ public class Fresher extends Candidate {
 
 	@Override
 	public String showMe() {
-		return super.toString() +" , " +  this.education +" , " + this.graduationRank +" , " + this.graduationDate;
+		return super.toString() + " , " + this.education + " , " + this.graduationRank + " , " + this.graduationDate;
 	}
-	
 
 }

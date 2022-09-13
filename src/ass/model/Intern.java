@@ -6,6 +6,9 @@
 
 package ass.model;
 
+import java.util.Date;
+import java.util.List;
+
 public class Intern extends Candidate {
 
 	private String major;
@@ -19,8 +22,9 @@ public class Intern extends Candidate {
 		
 	}
 
-	public Intern(String major, int semester, String universityName) {
-		super();
+	public Intern(String candidateID, String fullName, Date birthDay, String email, int candidateType,
+			long candidatCount, List<Certification> certification,String major, int semester, String universityName) {
+	super(candidateID, fullName, birthDay, email, candidateType, candidatCount, certification);
 		this.major = major;
 		this.semester = semester;
 		this.universityName = universityName;

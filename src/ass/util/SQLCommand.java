@@ -23,4 +23,12 @@ public class SQLCommand {
 	 
 	 public static final String GET_ALL = "SELECT * FROM dbo.Candidate";
 	 
+	 
+	 public static final String UPDATE_CANDIDATE_BY_ID = "SELECT * FROM dbo.Candidate WHERE candidateid = ?";
+	 
+	 public static final String UPDATE_FRESHER_BY_ID = "SELECT * FROM dbo.Candidate WHERE candidateid = ? AND candidatetype = 1";
+	 
+	 public static final String UPDATE_INTERN_BY_ID = "SELECT * FROM dbo.Candidate WHERE candidateid = ? AND candidatetype = 2";
+	 
+	 public static final String INSERT_CANDIDATE = "SELECT * FROM dbo.Candidate";
 }

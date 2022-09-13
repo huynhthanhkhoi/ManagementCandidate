@@ -15,5 +15,7 @@ import ass.model.Experience;
 public interface ExperienceDAO {
 	
 	boolean addExperience(Experience ex) throws SQLException;
+	
+	
 
 }
